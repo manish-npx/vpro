@@ -5,11 +5,13 @@ const Todos = () => {
   const [allToDos, setAllToDos] = useState([]);
 
   const handelInput = (e) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setTodos([{ name: value }]);
   };
 
-  console.log("todos", todos);
+  console.log("allToDos", allToDos);
+
   const handelSubmit = (e) => {
     e.preventDefault();
     setAllToDos([...allToDos, ...todos]);
@@ -17,6 +19,11 @@ const Todos = () => {
 
   const generateKey = (pre) => {
     return `${pre}_${new Date().getTime()}`;
+  };
+
+  const handelUpdateTodo = (e) => {
+    console.log("update i=>", e.target.value);
+    console.log("check=>", allToDos.indexOf(e.target.value));
   };
 
   const todoMaps = allToDos.map((val, i) => {
@@ -27,7 +34,12 @@ const Todos = () => {
         <td>
           <div className="row">
             <div className="col-auto">
-              <button type="button" className="btn btn-xs btn-primary">
+              <button
+                type="button"
+                className="btn btn-xs btn-primary"
+                value={val.name}
+                onClick={handelUpdateTodo}
+              >
                 Edit
               </button>
             </div>
