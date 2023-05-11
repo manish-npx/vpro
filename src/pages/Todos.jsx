@@ -26,6 +26,13 @@ const Todos = () => {
     console.log("check=>", allToDos.indexOf(e.target.value));
   };
 
+  const handelDeleteToDo = (delName) => {
+    const delToDo = allToDos.filter((val) => {
+      return val !== delName;
+    });
+    setAllToDos(delToDo);
+  };
+
   const todoMaps = allToDos.map((val, i) => {
     return (
       <tr key={generateKey(val.name)}>
@@ -37,14 +44,17 @@ const Todos = () => {
               <button
                 type="button"
                 className="btn btn-xs btn-primary"
-                value={val.name}
-                onClick={handelUpdateTodo}
+                onClick={() => handelUpdateTodo(val.name)}
               >
                 Edit
               </button>
             </div>
             <div className="col-auto">
-              <button type="button" className="btn btn-xs btn-danger">
+              <button
+                type="button"
+                className="btn btn-xs btn-danger"
+                onClick={() => handelDeleteToDo(val.name)}
+              >
                 Delete
               </button>
             </div>
