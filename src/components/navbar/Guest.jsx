@@ -1,19 +1,12 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import AuthUser from '../AuthUser';
 import Footer from '../../components/Footer'
 import PublicRoutes from '../../routes/PublicRoutes';
 
 
 const Guest = () => {
-    const { token, logout } = AuthUser();
-    const logoutUser = () => {
-        if (token !== undefined) {
-            logout();
-        }
-    }
     return (
-        <>
+        <React.Fragment>
             <div className="container">
                 <nav className="navbar navbar-expand-lg navbar-white bg-white">
                     <div className="container-fluid">
@@ -43,7 +36,7 @@ const Guest = () => {
 
             <PublicRoutes />
             <Footer />
-        </>
+        </React.Fragment>
     )
 }
 

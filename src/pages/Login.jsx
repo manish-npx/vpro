@@ -1,12 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import AuthUser from "../components/AuthUser";
 import logo from "../assets/logo.png";
 
 const Login = () => {
-  const [email, setEmail] = useState(); //create email state
-  const [password, setPassword] = useState(); //create password state
-  const { http, setToken, getToken } = AuthUser();
+  const [email, setEmail] = useState(""); //create email state
+  const [password, setPassword] = useState(""); //create password state
+  const { http, setToken } = AuthUser();
 
   //This is used for when login api have only token
   const [user, setUser] = useState([]); // user data return in login api directly pass
@@ -32,7 +31,7 @@ const Login = () => {
   );
 
   return (
-    <>
+    <React.Fragment>
       <div className="container">
         <div className="row">
           <div className="col"></div>
@@ -96,7 +95,7 @@ const Login = () => {
           <div className="col"></div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

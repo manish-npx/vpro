@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import AuthUser from '../AuthUser';
 import Footer from '../../components/Footer'
-import PrivateRoutes from '../../routes/PrivateRoutes';
+import PublicRoutes from '../../routes/PublicRoutes';
 const Auth = () => {
 
     const { token, logout } = AuthUser();
@@ -12,7 +12,7 @@ const Auth = () => {
         }
     }
     return (
-        <>
+        <React.Fragment>
             <div className="container">
                 <nav className="navbar navbar-expand-lg navbar-white bg-white">
                     <div className="container-fluid">
@@ -50,10 +50,11 @@ const Auth = () => {
             </div>
 
 
-            <PrivateRoutes />
+
+            <PublicRoutes />
             <Footer />
 
-        </>
+        </React.Fragment>
     )
 }
 

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
 import AuthUser from "../components/AuthUser";
-import { Outlet, Navigate, useLocation } from "react-router-dom";
-import Loading from "../components/Loading";
+import { Outlet, Navigate } from "react-router-dom";
 
-const PrivateRoutes = () => {
+const PrivateRoutes = ({ component: component, ...rest }) => {
   //get token from auth
   const { getToken } = AuthUser();
 

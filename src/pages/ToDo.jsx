@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StarRating from "./StarRating";
+//import StarRating from "./StarRating";
 
 const ToDo = () => {
   const [toDos, setToDos] = useState({});
@@ -19,7 +19,7 @@ const ToDo = () => {
     // console.log('toDos', toDos);
   };
   const handelEditToDos = (upName) => {
-    console.log("update", upName);
+    console.log("updateToDos", updateToDos);
     setUpdateToDos(upName);
   };
 
@@ -30,7 +30,7 @@ const ToDo = () => {
 
   // <ToDoInput val={val} i={i} key={i} />
 
-  const displayToDo = allToDos.map((val, i) => {
+  const displayToDo = allToDos && allToDos.map((val, i) => {
     return (
       <>
         <tr key={val.toString()}>
