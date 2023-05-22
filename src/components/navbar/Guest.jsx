@@ -1,7 +1,17 @@
+import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import AuthUser from '../AuthUser';
+import Footer from '../../components/Footer'
+import PublicRoutes from '../../routes/PublicRoutes';
 
 
-function NavBar() {
+const Guest = () => {
+    const { token, logout } = AuthUser();
+    const logoutUser = () => {
+        if (token !== undefined) {
+            logout();
+        }
+    }
     return (
         <>
             <div className="container">
@@ -17,12 +27,6 @@ function NavBar() {
                                     <NavLink className="nav-link" aria-current="page" to="/home" end>Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/todo">ToDos</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" to="/student">Student</NavLink>
-                                </li>
-                                <li className="nav-item">
                                     <NavLink className="nav-link" to="/about-us">About-Us</NavLink>
                                 </li>
                                 <li className="nav-item">
@@ -32,13 +36,15 @@ function NavBar() {
                         </div>
                     </div>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <NavLink className="btn btn-xs btn-primary me-md-2" to="/login">Login</NavLink>
+                        <NavLink className="btn btn-sm btn-pills btn-soft-primary me-md-2" to="/login">Login</NavLink>
                     </div>
                 </nav>
             </div>
 
+            <PublicRoutes />
+            <Footer />
         </>
     )
 }
 
-export default NavBar
+export default Guest

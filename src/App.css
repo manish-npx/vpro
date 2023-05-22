@@ -1,3 +1,27 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
 .nav-link a {
     color: black !important;
+}
+
+.star-container span {
+    margin: 0px 2px;
+    font-size: 5rem;
+}
+
+.star-container .hovered {
+    margin: 0px 2px;
+    font-size: 5rem;
+    color: yellow;
+}
+
+li.nav-item {
+    background-color: white !important;
+}
+
+.carousel-indicators {
+    display: none !important;
 }

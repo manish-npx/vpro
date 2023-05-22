@@ -1,20 +1,16 @@
 //import { useState } from 'react'
 import './App.css'
-import NavBar from './components/NavBar'
-import MyRoutes from './routes/MyRoutes'
+import Auth from './components/navbar/Auth';
+import Guest from './components/navbar/Guest';
+import AuthUser from './components/AuthUser';
 
 
 
+const App = () => {
+  const { getToken } = AuthUser();
 
-function App() {
+  return getToken() ? <Auth /> : <Guest />
 
-  return (
-    <>
-      <NavBar />
-      <MyRoutes />
-
-    </>
-  )
 }
 
 export default App

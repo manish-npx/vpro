@@ -1,8 +1,15 @@
-import React from 'react'
+import Features from '../components/Features'
+import HeroImage from '../components/HeroImage'
 
-function Home() {
+
+const Home = () => {
     return (
-        <div>Home</div>
+        <>
+            <HeroImage />
+            <Features />
+
+
+        </>
     )
 }
 

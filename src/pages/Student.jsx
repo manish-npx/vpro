@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+//import { BsHeartFill, BsHeart } from 'react-icons/bs';
+
 
 
 function Student() {
@@ -12,15 +14,15 @@ function Student() {
     const [loading, setLoading] = useState(true);
     const [students, setStudents] = useState([]);
     const [perPage, setPerPage] = useState(10)
-    const pageLimit = 1000;
+    const pageLimit = 500;
     const [currentPage, setCurrentPage] = useState(1)
-
     const numOfTotalPages = Math.ceil(students.length / perPage);
-    const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
-
+    const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);   //Calulating No. of Page
     const indexOfLastPage = currentPage * perPage;
     const indexOfFirstPage = indexOfLastPage - perPage;
     const visibleStudent = students.slice(indexOfFirstPage, indexOfLastPage);
+    const [count, setCount] = useState(0);
+
 
     const prevPageHanderler = () => {
         if (currentPage !== 1) setCurrentPage(currentPage - 1)
@@ -29,6 +31,18 @@ function Student() {
         if (currentPage !== numOfTotalPages) setCurrentPage(currentPage + 1)
     }
 
+    const handelPaginationCount = (event) => {
+        setPerPage(event.target.value);
+    }
+
+    const handelLike = (e) => {
+        if (count === 1) { setCount(0) } else {
+
+            let clickStudentLike = e.target.value;
+            console.log('clickStudentLike', clickStudentLike);
+            setCount(1)
+        }
+    }
     useEffect(() => {
         try {
             axios.get(`https://dummyjson.com/users?limit=${pageLimit}`).then(res => {
@@ -42,17 +56,17 @@ function Student() {
 
     const handelUserDelete = (event) => {
         try {
-            axios.delete(`https://dummyjson.com/users/${event.target.value}`, {
-                method: 'DELETE',
-            }).then(res => {
-                console.log(res);
-                if (res.status == 200) {
-                    MySwal.fire({
-                        title: <p>Success</p>,
-                        text: 'Records deleted successfully.',
-                    });
-                }
-            });
+
+            axios.delete(`https://dummyjson.com/users/${event.target.value}`)
+                .then(res => {
+                    console.log('Records ', res.data.isDeleted);
+                    if (res.data.isDeleted) {
+                        MySwal.fire({
+                            title: <p>Success</p>,
+                            text: 'Records deleted successfully.',
+                        });
+                    }
+                });
         } catch (error) {
             console.log('error', error);
 
@@ -62,10 +76,11 @@ function Student() {
     if (loading) return (<Loading />)
 
 
+
     let studentDetails = visibleStudent.length && visibleStudent.map((student, i) => {
         return (
             <tr key={student.id}>
-                <td>{i + 1}</td>
+                <th scope='row'>{i + 1}</th>
                 <td><img src={student.image} style={{ height: 50, width: 50 }} /></td>
                 <td>{student.firstName + ' ' + student.lastName}</td>
                 <td>{student.email}</td>
@@ -74,13 +89,14 @@ function Student() {
                 <td>{student.gender}</td>
                 <td>
                     <div className="container">
-                        <div className="btn-container">
+                        {count}
 
-                        </div>
+                        <button className='btn btn-sm btn-pills btn-soft-secondary' value={student.id} onClick={handelLike}> Click</button>
+
                     </div>
                 </td>
-                <td><Link to={`/student/${student.id}/edit`} className='btn btn-xs btn-info'>Edit</Link></td>
-                <td><button className='btn btn-xs btn-danger' value={student.id} onClick={handelUserDelete}>Delete</button></td>
+                <td><Link to={`/student/${student.id}/edit`} className='btn btn-sm btn-info'>Edit</Link></td>
+                <td><button className='btn btn-sm btn-danger' value={student.id} onClick={handelUserDelete}>Delete</button></td>
             </tr>
         );
     });
@@ -94,37 +110,63 @@ function Student() {
                         <div className="col-md-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4>Student List
-                                        <Link to='/student/create' className='btn btn-sm btn-primary float-end'>Add New</Link>
-                                    </h4>
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <h4>Student List
+                                            </h4>
+                                        </div>
+                                        <div className="col-1">
+                                            <select className='form-control' onChange={handelPaginationCount}>
+                                                <option value="10" >10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+
+                                            </select>
+                                        </div>
+                                        <div className="col-2">
+                                            <Link to='/student/create' className='btn btn-sm btn-primary float-end'>Add New</Link>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className="col-12">
+                                    <div className="component-wrapper rounded">
+                                        <div className="p-4 border-bottom">
+                                            <h5 className="title mb-0"> Table </h5>
+                                        </div>
+
+                                        <div className="p-4">
+                                            <div className="table-responsive bg-white rounded">
+                                                <table className="table mb-0 table-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" className="border-bottom">#</th>
+                                                            <th scope="col" className="border-bottom">Image</th>
+                                                            <th scope="col" className="border-bottom">Name</th>
+                                                            <th scope="col" className="border-bottom">Email</th>
+                                                            <th scope="col" className="border-bottom">Phone</th>
+                                                            <th scope="col" className="border-bottom">Address</th>
+                                                            <th scope="col" className="border-bottom">Gender</th>
+                                                            <th scope="col" className="border-bottom">Subscribe</th>
+                                                            <th scope="col" className="border-bottom">Edit</th>
+                                                            <th scope="col" className="border-bottom">Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {studentDetails}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="card-body">
-                                    <table className='table table-stiped'>
-                                        <thead>
-                                            <tr>
-                                                <td>#</td>
-                                                <td>Image</td>
-                                                <td>Name</td>
-                                                <td>Email</td>
-                                                <td>Phone</td>
-                                                <td>Address</td>
-                                                <td>Gender</td>
-                                                <td>Subscribe</td>
-                                                <td>Edit</td>
-                                                <td>Delete</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            {studentDetails}
-                                        </tbody>
-                                    </table>
-                                    <div>
-                                        <nav aria-label="Page navigation">
+                                    <div className='col-12'>
+                                        <div aria-label="pagination justify-content-center mb-0">
                                             <ul className="pagination pagination justify-content-left">
                                                 <li className={`page-item ${indexOfFirstPage === currentPage ? "active" : ""}`}>
                                                     <Link className="page-link" to="#" aria-label="Previous" onClick={prevPageHanderler}>
-                                                        <span aria-hidden="true">&laquo;</span>
+                                                        <span aria-hidden="true">Pre</span>
                                                     </Link>
                                                 </li>
                                                 {
@@ -138,11 +180,11 @@ function Student() {
                                                 }
                                                 <li className={`page-item ${indexOfLastPage === currentPage ? "active" : ""}`}>
                                                     <Link className="page-link" to="#" aria-label="Next" onClick={nextPageHanderler}>
-                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span aria-hidden="true">Next</span>
                                                     </Link>
                                                 </li>
                                             </ul>
-                                        </nav>
+                                        </div>
 
                                     </div>
                                 </div>

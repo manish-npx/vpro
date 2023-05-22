@@ -1,13 +1,22 @@
-import { Link, NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import AuthUser from '../AuthUser';
+import Footer from '../../components/Footer'
+import PrivateRoutes from '../../routes/PrivateRoutes';
+const Auth = () => {
 
-
-function NavBar() {
+    const { token, logout } = AuthUser();
+    const logoutUser = () => {
+        if (token !== undefined) {
+            logout();
+        }
+    }
     return (
         <>
             <div className="container">
                 <nav className="navbar navbar-expand-lg navbar-white bg-white">
                     <div className="container-fluid">
-                        <Link className="navbar-brand" to="/home">&VPRO</Link>
+                        <NavLink className="navbar-brand" to="/">&VPRO</NavLink>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -31,14 +40,21 @@ function NavBar() {
                             </ul>
                         </div>
                     </div>
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <NavLink className="btn btn-xs btn-primary me-md-2" to="/login">Login</NavLink>
+                    <div className="d-grid gap-2 d-md-flex justify-content-md-end mr-lg-4 pr-5">
+                        <NavLink className="btn btn-sm btn-pills btn-soft-info" to="/profile">Profile</NavLink>
+                    </div>
+                    <div className="d-grid gap-2 d-md-flex justify-content-md-end  pl-4">
+                        <button className='btn btn-sm btn-pills btn-soft-danger' onClick={logoutUser}>Logout</button>
                     </div>
                 </nav>
             </div>
+
+
+            <PrivateRoutes />
+            <Footer />
 
         </>
     )
 }
 
-export default NavBar
+export default Auth
