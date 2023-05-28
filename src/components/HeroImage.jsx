@@ -1,24 +1,35 @@
+import { Link } from "react-router-dom";
+import book from "../assets/images/book/book.png";
+
 const HeroImage = () => {
     return (
         <>
-            <div className="container col-xxl-8 px-4 py-5">
-                <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <section className="bg-half-170 d-table w-100 bg-light">
+                <div className="container">
 
-                    <div className="col-10 col-sm-8 col-lg-6">
-                        <div className="container px-5">
-                            <img src="https://shreethemes.in/landrick/landing/assets/images/illustrator/working_with_computer.svg" className="img-fluid" alt="VPROHero" />
+                    <div className="row mt-5 mt-sm-0 align-items-center">
+                        <div className="col-lg-6 col-md-6">
+                            <div className="title-heading me-lg-4">
+                                <h4 className="display-4 fw-bold mb-3"> The Most <br /> Comprehensive <br /> Book! </h4>
+                                <p className="text-muted para-desc mb-0">Start working with Landrick that can provide everything you need to generate awareness, drive traffic, connect.</p>
+                                <div className="mt-4 pt-2">
+                                    <Link to="#!" className="btn btn-soft-primary m-1">Buy Now @ $18</Link>
+                                    <Link to="#!" data-type="youtube" data-id="yba7hPeTSjk" className="btn btn-icon btn-pills btn-soft-primary m-1 lightbox">
+                                        <i data-feather="video" className="icons"></i>
+                                    </Link><span className="fw-bold text-uppercase small align-middle ms-1">Watch Now</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-6">
-                        <h1 className="display-5 fw-bold lh-1 mb-3">VPRO</h1>
-                        <p className="col-lg-10 fs-4">”A good programmer is someone who always looks both ways before crossing a one-way street.” – Doug Linder2</p>
-                        <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                            <button type="button" className="btn btn-outline-secondary btn-lg px-4">Default</button>
+
+                        <div className="col-lg-6 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <div className="bg-white p-5 rounded-md">
+                                <img src={book} className="img-fluid mx-auto d-block" alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div >
+            </section>
+
 
         </>
     )

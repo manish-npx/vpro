@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 
 
-function Student() {
+const Student = () => {
 
     const MySwal = withReactContent(Swal)
     const [loading, setLoading] = useState(true);
@@ -104,97 +104,94 @@ function Student() {
 
     return (
         <>
-            <div className="container mt-4">
-                <div className="">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <div className="row">
-                                        <div className="col-9">
-                                            <h4>Student List
-                                            </h4>
-                                        </div>
-                                        <div className="col-1">
-                                            <select className='form-control' onChange={handelPaginationCount}>
-                                                <option value="10" >10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
+            <section className='section'>
+                <div className="container mt-4">
+                    <div className="">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className=" border rounded shadow">
+                                    <div className="col-12">
+                                        <div className="component-wrapper rounded">
+                                            <div className="p-4 border-bottom">
+                                                <div className="row">
+                                                    <div className="col-9">
+                                                        <h4 className="title mb-0">Student List
+                                                        </h4>
+                                                    </div>
+                                                    <div className="col-1">
+                                                        {/* <select className='form-control' onChange={handelPaginationCount}>
+                                                        <option value="10" >10</option>
+                                                        <option value="20">20</option>
+                                                        <option value="30">30</option>
+                                                    </select> */}
+                                                    </div>
+                                                    <div className="col-2">
+                                                        <Link to='/student/create' className='btn btn-sm btn-primary float-end'>Add New</Link>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                            </select>
-                                        </div>
-                                        <div className="col-2">
-                                            <Link to='/student/create' className='btn btn-sm btn-primary float-end'>Add New</Link>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className="col-12">
-                                    <div className="component-wrapper rounded">
-                                        <div className="p-4 border-bottom">
-                                            <h5 className="title mb-0"> Table </h5>
-                                        </div>
-
-                                        <div className="p-4">
-                                            <div className="table-responsive bg-white rounded">
-                                                <table className="table mb-0 table-center">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col" className="border-bottom">#</th>
-                                                            <th scope="col" className="border-bottom">Image</th>
-                                                            <th scope="col" className="border-bottom">Name</th>
-                                                            <th scope="col" className="border-bottom">Email</th>
-                                                            <th scope="col" className="border-bottom">Phone</th>
-                                                            <th scope="col" className="border-bottom">Address</th>
-                                                            <th scope="col" className="border-bottom">Gender</th>
-                                                            <th scope="col" className="border-bottom">Subscribe</th>
-                                                            <th scope="col" className="border-bottom">Edit</th>
-                                                            <th scope="col" className="border-bottom">Delete</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {studentDetails}
-                                                    </tbody>
-                                                </table>
+                                            <div className="p-4">
+                                                <div className="table table-responsive bg-white rounded">
+                                                    <table className="table mb-0 table-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" className="border-bottom">#</th>
+                                                                <th scope="col" className="border-bottom">Image</th>
+                                                                <th scope="col" className="border-bottom">Name</th>
+                                                                <th scope="col" className="border-bottom">Email</th>
+                                                                <th scope="col" className="border-bottom">Phone</th>
+                                                                <th scope="col" className="border-bottom">Address</th>
+                                                                <th scope="col" className="border-bottom">Gender</th>
+                                                                <th scope="col" className="border-bottom">Subscribe</th>
+                                                                <th scope="col" className="border-bottom">Edit</th>
+                                                                <th scope="col" className="border-bottom">Delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {studentDetails}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="card-body">
-                                    <div className='col-12'>
-                                        <div aria-label="pagination justify-content-center mb-0">
-                                            <ul className="pagination pagination justify-content-left">
-                                                <li className={`page-item ${indexOfFirstPage === currentPage ? "active" : ""}`}>
-                                                    <Link className="page-link" to="#" aria-label="Previous" onClick={prevPageHanderler}>
-                                                        <span aria-hidden="true">Pre</span>
-                                                    </Link>
-                                                </li>
-                                                {
-                                                    pages.map((page) => {
-                                                        return (
-                                                            <li className={`page-item ${page === currentPage ? "active" : ""}`} key={page} >
-                                                                <Link className="page-link" to="#" onClick={() => setCurrentPage(page)}>{`${page}`}</Link>
-                                                            </li>
-                                                        )
-                                                    })
-                                                }
-                                                <li className={`page-item ${indexOfLastPage === currentPage ? "active" : ""}`}>
-                                                    <Link className="page-link" to="#" aria-label="Next" onClick={nextPageHanderler}>
-                                                        <span aria-hidden="true">Next</span>
-                                                    </Link>
-                                                </li>
-                                            </ul>
+                                    <div className="justify-content-center">
+                                        <div className='col-12'>
+                                            <div aria-label="pagination justify-content-center mb-0">
+                                                <ul className="pagination pagination justify-content-left">
+                                                    <li className={`page-item ${indexOfFirstPage === currentPage ? "active" : ""}`}>
+                                                        <Link className="page-link" to="#" aria-label="Previous" onClick={prevPageHanderler}>
+                                                            <span aria-hidden="true">Pre</span>
+                                                        </Link>
+                                                    </li>
+                                                    {pages &&
+                                                        pages.map((page) => {
+                                                            return (
+                                                                <li className={`page-item ${page === currentPage ? "active" : ""}`} key={page} >
+                                                                    <Link className="page-link" to="#" onClick={() => setCurrentPage(page)}>{`${page}`}</Link>
+                                                                </li>
+                                                            )
+                                                        })
+                                                    }
+                                                    <li className={`page-item ${indexOfLastPage === currentPage ? "active" : ""}`}>
+                                                        <Link className="page-link" to="#" aria-label="Next" onClick={nextPageHanderler}>
+                                                            <span aria-hidden="true">Next</span>
+                                                        </Link>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                         </div>
-
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div >
+            </section>
         </>
     )
 }

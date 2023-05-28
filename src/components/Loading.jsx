@@ -1,10 +1,11 @@
 function Loading() {
     return (
         <>
-            <div className='container mt-3'>
-                <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Loading... Please Wait</span>
+            <div id="preloader">
+                <div id="status">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
                     </div>
                 </div>
             </div>
